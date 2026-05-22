@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taekwondo Tigers Berlin e.V.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0c0d0f;
+      --dark:    #141519;
+      --card:    #1b1d22;
+      --card2:   #20222a;
+      --border:  #2c2f38;
+      --accent:  #C0392B;
+      --accent-dim: rgba(192,57,43,.12);
+      --accent-glow: rgba(192,57,43,.22);
+      --gold:    #C8A96E;
+      --gold-dim: rgba(200,169,110,.15);
+      --white:   #EEECe8;
+      --muted:   #767a88;
+      --muted2:  #4a4e5c;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-cond:    'Barlow Condensed', sans-serif;
+      --font-body:    'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ══ NAV ══════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 68px;
+      background: rgba(12,13,15,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 30px rgba(0,0,0,.4); }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: .75rem;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 38px; width: auto; object-fit: contain; }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: .08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .nav-logo-text span { color: var(--accent); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 1.8rem; list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-cond);
+      font-size: .85rem; font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      color: var(--white) !important;
+      background: var(--accent);
+      padding: .4rem 1.1rem;
+      border-radius: 2px;
+      transition: opacity .2s, transform .15s !important;
+    }
+    .nav-cta:hover { opacity: .85; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; position: fixed; inset: 68px 0 0 0; z-index: 99;
+      background: rgba(12,13,15,.98); backdrop-filter: blur(16px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: 2.2rem;
+      color: var(--white); text-decoration: none;
+      letter-spacing: .08em; transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu .mob-cta {
+      font-size: 1rem; background: var(--accent);
+      padding: .6rem 2rem; border-radius: 2px;
+    }
+
+    /* ══ HERO ══════════════════════════════════════ */
+    #hero {
+      position: relative; min-height: 100svh;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: flex-end;
+      padding: 0 5vw 8vh; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(12,13,15,.95) 45%, rgba(12,13,15,.4) 100%),
+        linear-gradient(to top, rgba(12,13,15,.85) 0%, transparent 55%);
+      z-index: 1;
+    }
+    .hero-stripes {
+      position: absolute; inset: 0; z-index: 0;
+      background: repeating-linear-gradient(
+        -52deg, transparent, transparent 80px,
+        rgba(192,57,43,.025) 80px, rgba(192,57,43,.025) 81px
+      );
+    }
+    .hero-glow {
+      position: absolute; right: 10vw; top: 40%;
+      transform: translateY(-50%);
+      width: min(480px, 42vw); aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,57,43,.1) 0%, transparent 68%);
+      filter: blur(50px); z-index: 0;
+    }
+
+    .hero-logo {
+      position: absolute; right: 6vw; top: 50%;
+      transform: translateY(-50%);
+      width: min(340px, 32vw);
+      opacity: .08; z-index: 0;
+      pointer-events: none;
+      filter: grayscale(1);
+    }
+
+    .hero-eyebrow {
+      position: relative; z-index: 2;
+      font-family: var(--font-cond); font-size: .75rem;
+      font-weight: 700; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .9rem;
+      opacity: 0; animation: fadeUp .6s .15s forwards;
+    }
+    .hero-title {
+      position: relative; z-index: 2;
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 9vw, 8.5rem);
+      line-height: .9; letter-spacing: .02em;
+      margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp .7s .3s forwards;
+    }
+    .hero-title em { font-style: normal; color: var(--gold); display: block; }
+
+    .hero-sub {
+      position: relative; z-index: 2;
+      font-size: .98rem; font-weight: 300;
+      color: rgba(238,236,232,.6);
+      max-width: 420px; margin-bottom: 2.2rem; line-height: 1.75;
+      opacity: 0; animation: fadeUp .7s .45s forwards;
+    }
+    .hero-actions {
+      position: relative; z-index: 2;
+      display: flex; gap: .85rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .7s .6s forwards;
+    }
+
+    .btn-primary {
+      font-family: var(--font-cond); font-size: .88rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--white); background: var(--accent);
+      padding: .8rem 2rem; border-radius: 2px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-primary:hover {
+      opacity: .88; transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(192,57,43,.28);
+    }
+    .btn-ghost {
+      font-family: var(--font-cond); font-size: .88rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--white); background: transparent;
+      padding: .8rem 2rem; border-radius: 2px;
+      text-decoration: none;
+      border: 1px solid rgba(238,236,232,.2);
+      transition: border-color .2s, background .2s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(238,236,232,.5);
+      background: rgba(255,255,255,.04);
+    }
+
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      opacity: 0; animation: fadeUp .5s 1s forwards;
+    }
+    .hero-scroll span {
+      font-family: var(--font-cond); font-size: .65rem;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--muted2);
+    }
+    .scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    /* ══ SECTIONS ══════════════════════════════════ */
+    section { padding: 6.5rem 5vw; }
+    section:nth-child(odd) { background: var(--black); }
+    section:nth-child(even) { background: var(--dark); }
+
+    .section-label {
+      font-family: var(--font-cond); font-size: .72rem; font-weight: 700;
+      letter-spacing: .28em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      line-height: 1; letter-spacing: .03em; margin-bottom: .8rem;
+    }
+    .section-sub {
+      font-size: .93rem; font-weight: 300;
+      color: rgba(238,236,232,.55); max-width: 520px; margin-bottom: 3rem;
+    }
+    .divider { width: 40px; height: 2px; background: var(--accent); margin: 1rem 0 1.8rem; }
+
+    /* ══ FÜR WEN CARDS ═════════════════════════════ */
+    .cards-3 {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1px; background: var(--border);
+    }
+    .card-item {
+      background: var(--card); padding: 2.2rem 1.8rem;
+      position: relative; overflow: hidden; transition: background .25s;
+    }
+    .card-item::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--accent); transform: scaleX(0); transform-origin: left;
+      transition: transform .4s;
+    }
+    .card-item:hover { background: #1e2028; }
+    .card-item:hover::before { transform: scaleX(1); }
+    .card-num {
+      font-family: var(--font-display); font-size: 3.5rem;
+      color: rgba(192,57,43,.1); line-height: 1; margin-bottom: .4rem;
+      transition: color .3s;
+    }
+    .card-item:hover .card-num { color: rgba(192,57,43,.22); }
+    .card-title {
+      font-family: var(--font-cond); font-size: 1.1rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .6rem;
+    }
+    .card-text {
+      font-size: .88rem; font-weight: 300; line-height: 1.75;
+      color: rgba(238,236,232,.55);
+    }
+
+    /* ══ TRAINING ══════════════════════════════════ */
+    .training-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3.5rem; align-items: start;
+    }
+    @media(max-width: 860px){ .training-layout { grid-template-columns: 1fr; } }
+
+    .day-block { margin-bottom: 2rem; }
+    .day-label {
+      font-family: var(--font-cond); font-size: .7rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .6rem;
+      padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .day-location {
+      font-family: var(--font-cond); font-size: .78rem; font-weight: 500;
+      letter-spacing: .06em; color: var(--gold);
+      margin-bottom: .5rem;
+    }
+    .day-location a { color: inherit; text-decoration: none; }
+    .day-location a:hover { opacity: .75; }
+
+    .time-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 1rem; padding: .5rem 0;
+      border-bottom: 1px solid rgba(44,47,56,.5);
+    }
+    .time-row:last-child { border-bottom: none; }
+    .time-clock {
+      font-family: var(--font-cond); font-size: .85rem; font-weight: 700;
+      color: var(--white); white-space: nowrap; min-width: 120px;
+    }
+    .time-group {
+      font-size: .85rem; font-weight: 300;
+      color: rgba(238,236,232,.6); text-align: right;
+    }
+    .tag {
+      display: inline-block;
+      font-family: var(--font-cond); font-size: .65rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .15rem .55rem; border-radius: 2px;
+      background: var(--accent-dim); color: var(--accent);
+      border: 1px solid rgba(192,57,43,.25);
+    }
+    .tag.gold {
+      background: var(--gold-dim); color: var(--gold);
+      border-color: rgba(200,169,110,.25);
+    }
+
+    /* Two maps side by side */
+    .maps-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+    }
+    @media(max-width: 600px){ .maps-grid { grid-template-columns: 1fr; } }
+
+    .map-wrap {
+      border: 1px solid var(--border); border-radius: 3px; overflow: hidden;
+      position: relative;
+    }
+    .map-header {
+      background: var(--card2); padding: .6rem .9rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .map-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+    .map-addr {
+      font-family: var(--font-cond); font-size: .72rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--white);
+    }
+    .map-day-tag {
+      margin-left: auto;
+      font-family: var(--font-cond); font-size: .65rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(200,169,110,.25);
+      padding: .1rem .5rem; border-radius: 2px;
+      background: var(--gold-dim);
+    }
+    .map-wrap iframe {
+      width: 100%; display: block; border: none;
+      filter: grayscale(.7) contrast(.95);
+      aspect-ratio: 4/3;
+    }
+
+    /* ══ TRAINER ════════════════════════════════════ */
+    .trainer-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 1.2rem;
+    }
+    .trainer-card {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border); background: var(--card);
+      aspect-ratio: 3/4; display: flex; flex-direction: column;
+      justify-content: flex-end; transition: border-color .25s;
+    }
+    .trainer-card:hover { border-color: rgba(192,57,43,.5); }
+    .trainer-avatar {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--card) 0%, var(--card2) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 3.2rem;
+      color: rgba(192,57,43,.18);
+    }
+    .trainer-info {
+      position: relative; z-index: 1;
+      background: linear-gradient(to top, rgba(12,13,15,.96), rgba(12,13,15,.5));
+      padding: 1.1rem .9rem .9rem;
+    }
+    .trainer-name {
+      font-family: var(--font-cond); font-size: .95rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .trainer-role { font-size: .75rem; color: var(--gold); margin-top: .2rem; }
+
+    /* ══ TERMINE ════════════════════════════════════ */
+    .termine-list { display: flex; flex-direction: column; }
+    .termin-item {
+      display: grid; grid-template-columns: 72px 1fr auto;
+      align-items: center; gap: 1.5rem;
+      padding: 1.3rem 0; border-bottom: 1px solid var(--border);
+      transition: padding-left .2s; cursor: default;
+    }
+    .termin-item:hover { padding-left: .4rem; }
+    .termin-date {
+      text-align: center; background: var(--card);
+      border: 1px solid var(--border); padding: .45rem;
+      border-radius: 2px; transition: border-color .2s, background .2s;
+    }
+    .termin-item:hover .termin-date {
+      border-color: rgba(192,57,43,.4); background: var(--accent-dim);
+    }
+    .termin-day {
+      font-family: var(--font-display); font-size: 1.6rem;
+      line-height: 1; color: var(--accent);
+    }
+    .termin-month {
+      font-family: var(--font-cond); font-size: .6rem; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase; color: var(--muted);
+    }
+    .termin-name {
+      font-family: var(--font-cond); font-size: 1rem; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .termin-location { font-size: .8rem; color: var(--muted); margin-top: .15rem; }
+    .termin-badge {
+      font-family: var(--font-cond); font-size: .65rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(200,169,110,.25);
+      padding: .2rem .6rem; border-radius: 2px; background: var(--gold-dim);
+      white-space: nowrap;
+    }
+    @media(max-width: 580px){
+      .termin-item { grid-template-columns: 60px 1fr; }
+      .termin-badge { display: none; }
+    }
+
+    /* ══ VIDEOS ═════════════════════════════════════ */
+    .video-grid {
+      display: grid; grid-template-columns: 2fr 1fr;
+      grid-template-rows: 1fr 1fr; gap: 1px; background: var(--border);
+    }
+    .video-item { background: var(--card); overflow: hidden; }
+    .video-item:first-child { grid-row: 1 / 3; }
+    .video-item iframe { width: 100%; border: none; display: block; aspect-ratio: 16/9; }
+    .video-item:first-child iframe { height: 100%; min-height: 280px; aspect-ratio: unset; }
+    @media(max-width: 640px){
+      .video-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .video-item:first-child { grid-row: auto; }
+      .video-item:first-child iframe { height: auto; aspect-ratio: 16/9; }
+    }
+
+    /* ══ TEAMWEAR ════════════════════════════════════ */
+    #teamwear {
+      background:
+        linear-gradient(160deg, rgba(192,57,43,.07) 0%, transparent 55%),
+        var(--dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 5vw;
+    }
+    .teamwear-inner {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+    }
+    .teamwear-logo {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: .04em; color: var(--white);
+    }
+    .teamwear-logo span { color: var(--accent); }
+    .teamwear-steps {
+      display: flex; flex-direction: column; gap: .5rem; margin: 1rem 0 1.5rem;
+    }
+    .teamwear-steps span {
+      font-size: .86rem; font-weight: 300;
+      color: rgba(238,236,232,.55);
+    }
+
+    /* ══ KONTAKT ════════════════════════════════════ */
+    #kontakt .inner {
+      display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 5rem; align-items: start;
+    }
+    @media(max-width: 768px){ #kontakt .inner { grid-template-columns: 1fr; gap: 3rem; } }
+
+    .contact-info { display: flex; flex-direction: column; gap: 1.8rem; }
+    .contact-label {
+      font-family: var(--font-cond); font-size: .68rem; font-weight: 700;
+      letter-spacing: .25em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .35rem;
+    }
+    .contact-value { font-size: .95rem; font-weight: 400; color: var(--white); }
+    .contact-value a { color: inherit; text-decoration: none; }
+    .contact-value a:hover { color: var(--gold); }
+    .contact-note { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+
+    .verband-links { display: flex; gap: .75rem; margin-top: .4rem; flex-wrap: wrap; }
+    .verband-link {
+      font-family: var(--font-cond); font-size: .75rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border: 1px solid var(--border); padding: .3rem .8rem;
+      border-radius: 2px; transition: color .2s, border-color .2s;
+    }
+    .verband-link:hover { color: var(--white); border-color: var(--muted2); }
+
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label {
+      display: block; font-family: var(--font-cond); font-size: .7rem;
+      font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .45rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; background: var(--card); border: 1px solid var(--border);
+      border-radius: 2px; color: var(--white); font-family: var(--font-body);
+      font-size: .92rem; padding: .8rem .95rem; outline: none;
+      transition: border-color .2s; resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: rgba(192,57,43,.6); }
+    .form-group textarea { min-height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+    @media(max-width: 460px){ .form-row { grid-template-columns: 1fr; } }
+    .form-note { font-size: .75rem; color: var(--muted); margin-bottom: 1rem; }
+
+    /* ══ FOOTER ═════════════════════════════════════ */
+    footer {
+      background: #080910;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5vw;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 1.5rem;
+    }
+    @media(max-width: 580px){ footer { grid-template-columns: 1fr; text-align: center; } }
+
+    .footer-brand {
+      display: flex; align-items: center; gap: .7rem; margin-bottom: .4rem;
+    }
+    .footer-brand img { height: 30px; width: auto; filter: brightness(.8); }
+    .footer-name {
+      font-family: var(--font-display); font-size: 1.2rem;
+      letter-spacing: .06em; color: var(--white);
+    }
+    .footer-name span { color: var(--accent); }
+    .footer-copy { font-size: .75rem; color: var(--muted2); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; }
+    @media(max-width: 580px){ .footer-right { align-items: center; } }
+
+    .social-icons { display: flex; gap: .65rem; }
+    .social-icon {
+      width: 34px; height: 34px; border: 1px solid var(--border);
+      border-radius: 2px; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none; font-size: .8rem;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .social-icon:hover {
+      border-color: var(--muted2); color: var(--white);
+      background: rgba(255,255,255,.04);
+    }
+    .footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: flex-end; }
+    .footer-links a {
+      font-family: var(--font-cond); font-size: .7rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted2); text-decoration: none; transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--muted); }
+
+    /* ══ ANIMATIONS ═════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: .3; transform: scaleY(1); }
+      50%       { opacity: .9; transform: scaleY(1.15); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .65s, transform .65s;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    @media(max-width: 768px){
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ══ AKTUELLES ══════════════════════════════ */
+    .aktuelles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .post-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 3px; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: border-color .25s, transform .2s;
+    }
+    .post-card:hover { border-color: rgba(192,57,43,.4); transform: translateY(-2px); }
+    .post-img {
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: cover; display: block;
+      background: var(--card2);
+    }
+    .post-img-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--card) 0%, var(--card2) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; color: rgba(192,57,43,.15);
+      font-family: var(--font-display); letter-spacing: .1em;
+    }
+    .post-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+    .post-date {
+      font-family: var(--font-cond); font-size: .68rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .5rem;
+    }
+    .post-title {
+      font-family: var(--font-cond); font-size: 1.05rem; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase;
+      color: var(--white); margin-bottom: .5rem; line-height: 1.3;
+    }
+    .post-excerpt {
+      font-size: .84rem; font-weight: 300; line-height: 1.65;
+      color: rgba(238,236,232,.55); flex: 1;
+    }
+
+    /* ══ CLICK-TO-LOAD ══════════════════════════════ */
+    .ctl-wrap {
+      position: relative; width: 100%; height: 100%;
+      background: var(--card2);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      cursor: pointer; overflow: hidden; min-height: 160px;
+    }
+    .ctl-yt { aspect-ratio: 16/9; }
+    .ctl-yt .ctl-thumb {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      filter: brightness(.5); transition: filter .3s;
+    }
+    .ctl-yt:hover .ctl-thumb { filter: brightness(.35); }
+    .ctl-play {
+      position: relative; z-index: 2;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: rgba(192,57,43,.9);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .2s, background .2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.5);
+    }
+    .ctl-wrap:hover .ctl-play { transform: scale(1.1); background: var(--accent); }
+    .ctl-play svg { margin-left: 4px; }
+    .ctl-title {
+      position: relative; z-index: 2;
+      font-family: var(--font-cond); font-size: .78rem;
+      font-weight: 600; letter-spacing: .08em;
+      color: rgba(238,236,232,.75); margin-top: .7rem;
+      text-align: center; padding: 0 1rem;
+    }
+    .ctl-notice {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      background: rgba(12,13,15,.82); padding: .4rem .7rem;
+      font-size: .65rem; color: var(--muted);
+      text-align: center; line-height: 1.4;
+    }
+    .ctl-notice a { color: var(--muted); text-decoration: underline; }
+
+    .ctl-map { aspect-ratio: 4/3; gap: .5rem; }
+    .ctl-map-icon { position: relative; z-index: 2; font-size: 2rem; margin-bottom: .3rem; }
+    .ctl-map-addr {
+      position: relative; z-index: 2;
+      font-family: var(--font-cond); font-size: .88rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--white); text-align: center; padding: 0 1rem; margin-bottom: .5rem;
+    }
+    .ctl-map-sub {
+      position: relative; z-index: 2;
+      font-size: .75rem; color: var(--muted);
+      text-align: center; margin-bottom: .8rem;
+    }
+    .ctl-map-btn {
+      position: relative; z-index: 2;
+      font-family: var(--font-cond); font-size: .72rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--white); background: var(--accent);
+      border: none; cursor: pointer;
+      padding: .45rem 1.1rem; border-radius: 2px; transition: opacity .2s;
+    }
+    .ctl-map-btn:hover { opacity: .85; }
+    .ctl-wrap.loaded { display: block; cursor: default; min-height: unset; }
+    .ctl-wrap.loaded iframe { width: 100%; height: 100%; border: none; display: block; filter: grayscale(.7) contrast(.95); }
+    .ctl-yt.loaded { aspect-ratio: 16/9; }
+    .ctl-map.loaded { aspect-ratio: 4/3; }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="https://taekwondo-tigers.de/wp-content/uploads/2014/07/tigers-logo2.png"
+         alt="Taekwondo Tigers Berlin Logo" />
+    <span class="nav-logo-text">TIGERS<span>.</span>BERLIN</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#training">Training</a></li>
+    <li><a href="#trainer">Trainer</a></li>
+    <li><a href="#termine">Termine</a></li>
+    <li><a href="#aktuelles">Aktuelles</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="#kontakt" class="nav-cta">Probetraining →</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#training"  onclick="closeMenu()">Training</a>
+  <a href="#trainer"   onclick="closeMenu()">Trainer</a>
+  <a href="#termine"   onclick="closeMenu()">Termine</a>
+  <a href="#videos"    onclick="closeMenu()">Videos</a>
+  <a href="#kontakt"   onclick="closeMenu()">Kontakt</a>
+  <a href="#kontakt" class="mob-cta" onclick="closeMenu()">Probetraining →</a>
+</div>
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-stripes"></div>
+  <div class="hero-glow"></div>
+  <img class="hero-logo"
+       src="https://taekwondo-tigers.de/wp-content/uploads/2014/07/tigers-logo2.png"
+       alt="" aria-hidden="true" />
+  <div class="hero-bg"></div>
+
+  <p class="hero-eyebrow">Taekwondo Tigers Berlin e.V. — Wedding &amp; Reinickendorf</p>
+  <h1 class="hero-title">
+    Kampfsport<br>
+    <em>der Spitzenklasse</em>
+  </h1>
+  <p class="hero-sub">
+    Wettkampforientiertes Taekwondo für Kinder, Jugendliche und Erwachsene.
+    Probetraining jederzeit kostenlos und ohne Voranmeldung.
+  </p>
+  <div class="hero-actions">
+    <a href="#kontakt" class="btn-primary">Probetraining anfragen</a>
+    <a href="#training" class="btn-ghost">Trainingszeiten ansehen</a>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══ FÜR WEN ════════════════════════════════════════ -->
+<section id="fuerwen">
+  <div class="section-header reveal">
+    <p class="section-label">Der Verein</p>
+    <h2 class="section-title">Für jeden der Richtige</h2>
+    <div class="divider"></div>
+    <p class="section-sub">
+      Taekwondo ist grundsätzlich für jedermann geeignet – unabhängig von Alter und Erfahrung.
+      Gerade wegen unserer Wettkampf-Ausrichtung gilt: je früher man anfängt, desto besser.
+    </p>
+  </div>
+  <div class="cards-3">
+    <div class="card-item reveal reveal-delay-1">
+      <div class="card-num">01</div>
+      <h3 class="card-title">Minis &amp; Kinder</h3>
+      <p class="card-text">
+        Spielerischer Einstieg ab 4 Jahren. Unsere Trainer passen Tempo und Inhalt
+        dem Alter und der körperlichen Konstitution jedes Kindes an.
+      </p>
+    </div>
+    <div class="card-item reveal reveal-delay-2">
+      <div class="card-num">02</div>
+      <h3 class="card-title">Jugendliche</h3>
+      <p class="card-text">
+        Gezielte Leistungsförderung für nationale und internationale Wettkämpfe.
+        Disziplin, Technik und Teamgeist stehen im Mittelpunkt.
+      </p>
+    </div>
+    <div class="card-item reveal reveal-delay-3">
+      <div class="card-num">03</div>
+      <h3 class="card-title">Erwachsene</h3>
+      <p class="card-text">
+        Keine Vorkenntnisse nötig – nur eine lange Hose, ein T-Shirt und etwas
+        Neugierde. Probetraining jederzeit möglich.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRAINING ════════════════════════════════════════ -->
+<section id="training">
+  <div class="training-layout">
+    <div>
+      <div class="section-header reveal">
+        <p class="section-label">Trainingszeiten</p>
+        <h2 class="section-title">Wann &amp; Wo</h2>
+        <div class="divider"></div>
+      </div>
+
+      <!-- DIENSTAG -->
+      <div class="day-block reveal">
+        <div class="day-label">Dienstag</div>
+        <div class="day-location">📍 Amrumer Str. 34, 13353 Berlin — Obere Sporthalle</div>
+        <div class="time-row">
+          <div class="time-clock">17:30 – 18:30</div>
+          <div class="time-group">Wettkampftraining Leistungskader <span class="tag gold">Kader</span></div>
+        </div>
+      </div>
+
+      <!-- FREITAG -->
+      <div class="day-block reveal">
+        <div class="day-label">Freitag</div>
+        <div class="day-location">
+          📍 <a href="https://goo.gl/maps/t5LVpowQhYq" target="_blank" rel="noopener">
+            Tegeler Str. 18 / 19, 13353 Berlin — Brüder-Grimm-Grundschule
+          </a>
+        </div>
+        <div class="time-row">
+          <div class="time-clock">17:00 – 18:15</div>
+          <div class="time-group">KIDS – ab 6 Jahren <span class="tag">Anfänger &amp; Fortgeschr.</span></div>
+        </div>
+        <div class="time-row">
+          <div class="time-clock">18:18 – 19:15</div>
+          <div class="time-group">Kids Wettkampftraining <span class="tag gold">Ausgewählte</span></div>
+        </div>
+        <div class="time-row">
+          <div class="time-clock">19:30 – 20:30</div>
+          <div class="time-group">Jugend &amp; Erwachsene</div>
+        </div>
+        <div class="time-row">
+          <div class="time-clock">20:30 – 21:45</div>
+          <div class="time-group">Wettkampftraining Jugend &amp; Erw. <span class="tag gold">Kader</span></div>
+        </div>
+      </div>
+
+      <!-- SONNTAG -->
+      <div class="day-block reveal">
+        <div class="day-label">Sonntag</div>
+        <div class="day-location">
+          📍 <a href="https://goo.gl/maps/vcqSjQ1wEd8rTPNx8" target="_blank" rel="noopener">
+            Amrumer Str. 34, 13353 Berlin — Obere Sporthalle
+          </a>
+        </div>
+        <div class="time-row">
+          <div class="time-clock">12:00 – 12:45</div>
+          <div class="time-group">MINIS — 4 &amp; 5 Jährige</div>
+        </div>
+        <div class="time-row">
+          <div class="time-clock">13:00 – 14:15</div>
+          <div class="time-group">Kids 1 — ab 6 Jahren</div>
+        </div>
+        <div class="time-row">
+          <div class="time-clock">14:15 – 15:15</div>
+          <div class="time-group">Wettkampftraining Kids <span class="tag gold">Ausgewählte</span></div>
+        </div>
+        <div class="time-row">
+          <div class="time-clock">15:30 – 18:00</div>
+          <div class="time-group">Wettkampftraining Jugend <span class="tag gold">Kader</span></div>
+        </div>
+      </div>
+
+      <p style="font-size:.8rem; color:var(--muted); font-style:italic; margin-top:.5rem;">
+        Probetraining jederzeit ohne Voranmeldung möglich.
+      </p>
+    </div>
+
+    <!-- MAPS -->
+    <div class="reveal" style="display:flex; flex-direction:column; gap:1.2rem;">
+      <div class="maps-grid">
+        <div class="map-wrap">
+          <div class="map-header">
+            <div class="map-dot"></div>
+            <div class="map-addr">Tegeler Str. 18</div>
+            <span class="map-day-tag">Freitag</span>
+          </div>
+          <div class="ctl-wrap ctl-map"
+               data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2426.5563868214594!2d13.357830000000003!3d52.541460000000015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a8518246244e61%3A0x452ba2b183c825d4!2sTegeler+Str.+18%2C+13353+Berlin!5e0!3m2!1sde!2sde!4v1438420741862"
+               data-type="map" onclick="loadCtl(this)">
+            <div class="ctl-map-icon">📍</div>
+            <div class="ctl-map-addr">Tegeler Str. 18 / 19<br>13353 Berlin</div>
+            <div class="ctl-map-sub">Brüder-Grimm-Grundschule</div>
+            <button class="ctl-map-btn">Karte laden</button>
+            <div class="ctl-notice">
+              Google Maps laden — es gelten die
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" onclick="event.stopPropagation()">Datenschutzhinweise von Google</a>.
+            </div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <div class="map-header">
+            <div class="map-dot"></div>
+            <div class="map-addr">Amrumer Str. 34</div>
+            <span class="map-day-tag">Di &amp; So</span>
+          </div>
+          <div class="ctl-wrap ctl-map"
+               data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2426.297506937413!2d13.342371315326115!3d52.54614324204462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a8517cedbd1a29%3A0xf305368c396d1bb8!2sAmrumer%20Str.%2034%2C%2013353%20Berlin!5e0!3m2!1sde!2sde!4v1650907459977!5m2!1sde!2sde"
+               data-type="map" onclick="loadCtl(this)">
+            <div class="ctl-map-icon">📍</div>
+            <div class="ctl-map-addr">Amrumer Str. 34<br>13353 Berlin</div>
+            <div class="ctl-map-sub">Obere Sporthalle</div>
+            <button class="ctl-map-btn">Karte laden</button>
+            <div class="ctl-notice">
+              Google Maps laden — es gelten die
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" onclick="event.stopPropagation()">Datenschutzhinweise von Google</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRAINER ═════════════════════════════════════════ -->
+<section id="trainer">
+  <div class="section-header reveal">
+    <p class="section-label">Das Team</p>
+    <h2 class="section-title">Unsere Trainer</h2>
+    <div class="divider"></div>
+    <p class="section-sub">
+      Erfahrene Trainer achten auf Alter, Auffassungsgabe und körperliche
+      Konstitution — jeder Schüler wird individuell gefördert.
+    </p>
+  </div>
+  <div id="trainer-grid" class="trainer-grid">
+    <!-- wird dynamisch aus data/trainer.json geladen -->
+    <div class="trainer-card reveal reveal-delay-1">
+      <div class="trainer-avatar">PP</div>
+      <div class="trainer-info">
+        <div class="trainer-name">Patrick Prangel</div>
+        <div class="trainer-role">Cheftrainer · Vereinsvorsitzender</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TERMINE ═════════════════════════════════════════ -->
+<section id="termine">
+  <div class="section-header reveal">
+    <p class="section-label">Kalender</p>
+    <h2 class="section-title">Nächste Termine</h2>
+    <div class="divider"></div>
+  </div>
+  <!-- dynamisch aus data/termine.json geladen -->
+  <div id="termine-list" class="termine-list">
+    <p style="color:var(--muted); font-size:.9rem;">Termine werden geladen…</p>
+  </div>
+</section>
+
+<!-- ══ AKTUELLES ════════════════════════════════════════ -->
+<section id="aktuelles">
+  <div class="section-header reveal">
+    <p class="section-label">Aktuelles</p>
+    <h2 class="section-title">News &amp; Berichte</h2>
+    <div class="divider"></div>
+  </div>
+  <!-- dynamisch aus posts/*.md geladen (via posts-index.json) -->
+  <div id="aktuelles-list" class="aktuelles-grid">
+    <p style="color:var(--muted); font-size:.9rem;">Beiträge werden geladen…</p>
+  </div>
+</section>
+
+<!-- ══ VIDEOS ═════════════════════════════════════════ -->
+<section id="videos">
+  <div class="section-header reveal">
+    <p class="section-label">Einblicke</p>
+    <h2 class="section-title">Videos</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="video-grid reveal">
+    <div class="video-item">
+      <div class="ctl-wrap ctl-yt"
+           data-src="https://www.youtube-nocookie.com/embed/PJwRK7KP_fo?autoplay=1"
+           data-type="youtube" onclick="loadCtl(this)">
+        <div class="ctl-thumb" style="background-image:url('https://img.youtube.com/vi/PJwRK7KP_fo/maxresdefault.jpg')"></div>
+        <div class="ctl-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div class="ctl-title">Taekwondo Tigers Berlin — Vereinsvorstellung</div>
+        <div class="ctl-notice">
+          ▶ Klicken lädt YouTube-Inhalte. Es gelten die
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" onclick="event.stopPropagation()">Datenschutzhinweise von Google</a>.
+        </div>
+      </div>
+    </div>
+    <div class="video-item">
+      <div class="ctl-wrap ctl-yt"
+           data-src="https://www.youtube-nocookie.com/embed/bSbijVOc2mM?autoplay=1"
+           data-type="youtube" onclick="loadCtl(this)">
+        <div class="ctl-thumb" style="background-image:url('https://img.youtube.com/vi/bSbijVOc2mM/maxresdefault.jpg')"></div>
+        <div class="ctl-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div class="ctl-title">Kids Training — Sonntag</div>
+        <div class="ctl-notice">
+          ▶ Klicken lädt YouTube-Inhalte.
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" onclick="event.stopPropagation()">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+    <div class="video-item">
+      <div class="ctl-wrap ctl-yt"
+           data-src="https://www.youtube-nocookie.com/embed/QORXNA3j6E8?autoplay=1"
+           data-type="youtube" onclick="loadCtl(this)">
+        <div class="ctl-thumb" style="background-image:url('https://img.youtube.com/vi/QORXNA3j6E8/maxresdefault.jpg')"></div>
+        <div class="ctl-play">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <div class="ctl-title">Kindertraining</div>
+        <div class="ctl-notice">
+          ▶ Klicken lädt YouTube-Inhalte.
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" onclick="event.stopPropagation()">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:1.4rem; text-align:right;">
+    <a href="https://www.youtube.com/channel/UCDf-NxbKniXmDzNJmJPZvwg/playlists" target="_blank" rel="noopener"
+       style="font-family:var(--font-cond); font-size:.82rem; font-weight:700; letter-spacing:.1em;
+              text-transform:uppercase; color:var(--accent); text-decoration:none;">
+      Alle Videos auf YouTube →
+    </a>
+  </p>
+</section>
+
+<!-- ══ TEAMWEAR ════════════════════════════════════════ -->
+<section id="teamwear">
+  <div class="teamwear-inner">
+    <div class="reveal">
+      <p class="section-label">Ausrüstung</p>
+      <div class="teamwear-logo">TIGERS <span>×</span> ADIDAS</div>
+      <p style="margin-top:.7rem; font-size:.88rem; font-weight:300; color:rgba(238,236,232,.55); max-width:380px; line-height:1.7;">
+        Offizielle Tigers Teamwear direkt über die 11teamsports App bestellen —
+        schnell, einfach, direkt nach Hause.
+      </p>
+      <div class="teamwear-steps">
+        <span>① Link klicken &amp; Konto registrieren</span>
+        <span>② App herunterladen &amp; anmelden</span>
+        <span>③ Bequem über die App bestellen</span>
+      </div>
+      <a href="https://hoc-teams.11teamsports.com/?invitationToken=eyJhbGciOiJub25lIn0.eyJpbnZpdGVkQnkiOiJQYXRyaWNrIFByYW5nZWwiLCJjbHViTmFtZSI6IlRhZWt3b25kbyBUaWdlcnMgQmVybGluICIsInRlYW1OYW1lIjoiVGFla3dvbmRvIFRpZ2VycyBCZXJsaW4iLCJpbnZpdGF0aW9uVG9rZW4iOiI3NWY0OGQ4NzNlOTU0ZDE3ODkzNzEwOTczMGJhNzk5MiJ9."
+         target="_blank" rel="noopener" class="btn-primary">
+        Zur Teamwear App →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ KONTAKT ════════════════════════════════════════ -->
+<section id="kontakt">
+  <div class="inner">
+    <div>
+      <div class="section-header reveal">
+        <p class="section-label">Kontakt</p>
+        <h2 class="section-title">Schreib uns</h2>
+        <div class="divider"></div>
+        <p class="section-sub">
+          Neugierig? Einfach vorbeikommen oder kurz Bescheid geben —
+          wir freuen uns auf dich.
+        </p>
+      </div>
+      <div class="contact-info">
+        <div class="reveal">
+          <p class="contact-label">Telefon</p>
+          <p class="contact-value"><a href="tel:+491732378792">+49 (0)173 237 8792</a></p>
+          <p class="contact-note">Patrick Prangel</p>
+        </div>
+        <div class="reveal">
+          <p class="contact-label">E-Mail Allgemein</p>
+          <p class="contact-value"><a href="mailto:info@taekwondo-tigers.de">info@taekwondo-tigers.de</a></p>
+        </div>
+        <div class="reveal">
+          <p class="contact-label">E-Mail Mitgliedschaft</p>
+          <p class="contact-value"><a href="mailto:kasse@taekwondo-tigers.de">kasse@taekwondo-tigers.de</a></p>
+          <p class="contact-note">Beiträge, Mitgliedschaft, Kasse</p>
+        </div>
+        <div class="reveal">
+          <p class="contact-label">Postadresse</p>
+          <p class="contact-value">Kurzebracker Weg 69<br>13503 Berlin</p>
+        </div>
+        <div class="reveal">
+          <p class="contact-label">Mitglied bei</p>
+          <div class="verband-links">
+            <a href="http://www.tvbb.info" target="_blank" rel="noopener" class="verband-link">TVBB</a>
+            <a href="http://www.tjbb.de"   target="_blank" rel="noopener" class="verband-link">TJBB</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form action="https://formspree.io/f/DEINE_ID" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Max Mustermann" required />
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" placeholder="max@example.de" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Betreff</label>
+          <input type="text" id="subject" name="subject" placeholder="Probetraining / Mitgliedschaft / …" />
+        </div>
+        <div class="form-group">
+          <label for="message">Nachricht</label>
+          <textarea id="message" name="message" placeholder="Deine Nachricht …" required></textarea>
+        </div>
+        <p class="form-note">Wir antworten in der Regel innerhalb von 48 Stunden.</p>
+        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+          Nachricht senden →
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════ -->
+<footer>
+  <div>
+    <div class="footer-brand">
+      <img src="https://taekwondo-tigers.de/wp-content/uploads/2014/07/tigers-logo2.png" alt="Logo" />
+      <span class="footer-name">TIGERS<span>.</span>BERLIN</span>
+    </div>
+    <p class="footer-copy">© 2025 Taekwondo Tigers Berlin e.V. — Kampfsport in Berlin Wedding &amp; Reinickendorf</p>
+  </div>
+  <div class="footer-right">
+    <div class="social-icons">
+      <a href="https://www.facebook.com/tigers.berlin" target="_blank" rel="noopener" class="social-icon" title="Facebook">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+      <a href="https://www.youtube.com/channel/UCDf-NxbKniXmDzNJmJPZvwg" target="_blank" rel="noopener" class="social-icon" title="YouTube">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#141519"/>
+        </svg>
+      </a>
+    </div>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ JS ══════════════════════════════════════════════ -->
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40));
+
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobileMenu');
+  ham.addEventListener('click', () => {
+    const open = mob.classList.toggle('open');
+    ham.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  function closeMenu() {
+    mob.classList.remove('open');
+    ham.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Click-to-Load: lädt iframe erst auf Klick — keine Cookies vorher
+  function loadCtl(el) {
+    const src  = el.dataset.src;
+    const type = el.dataset.type;
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    if (type === 'youtube') {
+      iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+    }
+    el.innerHTML = '';
+    el.appendChild(iframe);
+    el.classList.add('loaded');
+    el.onclick = null;
+  }
+
+  // ── DYNAMISCHE DATEN ────────────────────────────────────────────────
+
+  const MONATE = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+
+  // Termine aus data/termine.json laden
+  async function loadTermine() {
+    const el = document.getElementById('termine-list');
+    try {
+      const res  = await fetch('/data/termine.json');
+      const data = await res.json();
+      const heute = new Date(); heute.setHours(0,0,0,0);
+
+      // Nur zukünftige Termine, sortiert
+      const liste = data.termine
+        .filter(t => new Date(t.datum) >= heute)
+        .sort((a, b) => new Date(a.datum) - new Date(b.datum))
+        .slice(0, 6);
+
+      if (!liste.length) {
+        el.innerHTML = '<p style="color:var(--muted);font-size:.9rem;">Aktuell keine Termine eingetragen.</p>';
+        return;
+      }
+
+      el.innerHTML = liste.map(t => {
+        const d   = new Date(t.datum);
+        const tag = String(d.getDate()).padStart(2,'0');
+        const mon = MONATE[d.getMonth()];
+        return `
+          <div class="termin-item reveal">
+            <div class="termin-date">
+              <div class="termin-day">${tag}</div>
+              <div class="termin-month">${mon}</div>
+            </div>
+            <div>
+              <div class="termin-name">${t.name}</div>
+              ${t.ort ? `<div class="termin-location">${t.ort}</div>` : ''}
+            </div>
+            <span class="termin-badge">${t.typ}</span>
+          </div>`;
+      }).join('');
+
+      // Reveal-Observer neu anwenden
+      el.querySelectorAll('.reveal').forEach(e => io.observe(e));
+    } catch {
+      el.innerHTML = '<p style="color:var(--muted);font-size:.9rem;">Termine konnten nicht geladen werden.</p>';
+    }
+  }
+
+  // Trainer aus data/trainer.json laden
+  async function loadTrainer() {
+    const el = document.getElementById('trainer-grid');
+    try {
+      const res  = await fetch('/data/trainer.json');
+      const data = await res.json();
+
+      el.innerHTML = data.trainer.map((t, i) => {
+        const initials = t.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+        const delay    = i < 3 ? ` reveal-delay-${i+1}` : '';
+        const avatar   = t.foto
+          ? `<img src="${t.foto}" alt="${t.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`
+          : `<div class="trainer-avatar">${initials}</div>`;
+        return `
+          <div class="trainer-card reveal${delay}">
+            ${avatar}
+            <div class="trainer-info">
+              <div class="trainer-name">${t.name}</div>
+              <div class="trainer-role">${t.rolle}</div>
+            </div>
+          </div>`;
+      }).join('');
+
+      el.querySelectorAll('.reveal').forEach(e => io.observe(e));
+    } catch { /* Fallback bleibt sichtbar */ }
+  }
+
+  // Aktuelles — Markdown-Posts laden
+  // Decap CMS erstellt posts/*.md — wir lesen eine posts-index.json
+  // die per Cloudflare Pages Build automatisch generiert wird.
+  // Fallback: direkt bekannte Posts laden
+  async function loadAktuelles() {
+    const el = document.getElementById('aktuelles-list');
+    try {
+      const res  = await fetch('/posts-index.json');
+      const list = await res.json(); // [{slug, title, date, excerpt, image}]
+
+      if (!list.length) {
+        el.innerHTML = '<p style="color:var(--muted);font-size:.9rem;">Noch keine Beiträge vorhanden.</p>';
+        return;
+      }
+
+      el.innerHTML = list
+        .filter(p => p.published !== false)
+        .sort((a,b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 6)
+        .map(p => {
+          const d   = new Date(p.date);
+          const fmt = `${d.getDate()}. ${MONATE[d.getMonth()]} ${d.getFullYear()}`;
+          const img = p.image
+            ? `<img class="post-img" src="${p.image}" alt="${p.title}" loading="lazy">`
+            : `<div class="post-img-placeholder">TIGERS</div>`;
+          return `
+            <article class="post-card reveal">
+              ${img}
+              <div class="post-body">
+                <div class="post-date">${fmt}</div>
+                <div class="post-title">${p.title}</div>
+                <div class="post-excerpt">${p.excerpt || ''}</div>
+              </div>
+            </article>`;
+        }).join('');
+
+      el.querySelectorAll('.reveal').forEach(e => io.observe(e));
+    } catch {
+      el.innerHTML = '<p style="color:var(--muted);font-size:.9rem;">Beiträge konnten nicht geladen werden.</p>';
+    }
+  }
+
+  // Alle dynamischen Daten laden
+  loadTermine();
+  loadTrainer();
+  loadAktuelles();
+</script>
+
+</body>
+</html>

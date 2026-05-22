@@ -1,0 +1,28 @@
+{
+  "termine": [
+    {
+      "name": "Gürtelprüfung",
+      "datum": "2026-06-14",
+      "ort": "Berlin Wedding · Sporthalle",
+      "typ": "Prüfung"
+    },
+    {
+      "name": "Berliner Landesmeisterschaft",
+      "datum": "2026-06-28",
+      "ort": "Berlin · TVBB",
+      "typ": "Wettkampf"
+    },
+    {
+      "name": "Sommercamp",
+      "datum": "2026-07-12",
+      "ort": "Berlin · Details folgen",
+      "typ": "Event"
+    },
+    {
+      "name": "Ostdeutsche Meisterschaft",
+      "datum": "2026-09-20",
+      "ort": "Berlin · TJBB",
+      "typ": "Wettkampf"
+    }
+  ]
+}
