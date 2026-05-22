@@ -1,0 +1,81 @@
+# ─────────────────────────────────────────────
+# Decap CMS Konfiguration — Taekwondo Tigers Berlin
+# Docs: https://decapcms.org/docs/configuration-options/
+# ─────────────────────────────────────────────
+
+backend:
+  name: github
+  repo: DEIN-GITHUB-USERNAME/tigers-berlin   # ← anpassen
+  branch: main
+  base_url: https://tigers-berlin.de         # ← deine Domain
+  auth_endpoint: /api/auth                   # Cloudflare Pages Function
+
+# Medien (Bilder) direkt im Repo speichern
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# Sprache der CMS-Oberfläche
+locale: "de"
+
+# ─────────────────────────────────────────────
+# COLLECTIONS — was der Kunde bearbeiten kann
+# ─────────────────────────────────────────────
+collections:
+
+  # ── AKTUELLES / BLOG ──────────────────────
+  - name: "aktuelles"
+    label: "Aktuelles"
+    label_singular: "Beitrag"
+    description: "Neuigkeiten, Erfolge, Ankündigungen"
+    folder: "posts"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Titel",          name: "title",     widget: "string" }
+      - { label: "Datum",          name: "date",      widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+      - { label: "Kurzbeschreibung", name: "excerpt", widget: "string",   hint: "Wird in der Übersicht angezeigt (~120 Zeichen)" }
+      - { label: "Titelbild",      name: "image",     widget: "image",    required: false }
+      - { label: "Inhalt",         name: "body",      widget: "markdown" }
+      - { label: "Veröffentlicht", name: "published", widget: "boolean",  default: true }
+
+  # ── TERMINE ───────────────────────────────
+  - name: "termine"
+    label: "Termine"
+    label_singular: "Termin"
+    description: "Wettkämpfe, Prüfungen, Events"
+    files:
+      - label: "Terminliste"
+        name: "terminliste"
+        file: "data/termine.json"
+        fields:
+          - label: "Termine"
+            name: "termine"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.datum}}"
+            fields:
+              - { label: "Name",      name: "name",   widget: "string" }
+              - { label: "Datum",     name: "datum",  widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+              - { label: "Ort",       name: "ort",    widget: "string",  required: false }
+              - { label: "Typ",       name: "typ",    widget: "select",  options: ["Wettkampf", "Vereinsintern", "Event", "Prüfung"] }
+
+  # ── TRAINER ───────────────────────────────
+  - name: "trainer"
+    label: "Trainer"
+    label_singular: "Trainer/in"
+    description: "Trainerteam pflegen"
+    files:
+      - label: "Trainerliste"
+        name: "trainerliste"
+        file: "data/trainer.json"
+        fields:
+          - label: "Trainer"
+            name: "trainer"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Name",     name: "name",  widget: "string" }
+              - { label: "Rolle",    name: "rolle", widget: "string",  hint: "z.B. Cheftrainer, Jugendtrainerin" }
+              - { label: "Foto",     name: "foto",  widget: "image",   required: false }
